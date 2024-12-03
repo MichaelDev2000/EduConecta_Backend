@@ -42,7 +42,7 @@ public class Usuario implements Serializable {
 
 	@Lob
 	@Column(name="usu_imgperfil")
-	private byte[] usuImgperfil;
+	private String usuImgperfil;
 
 	@Column(name="usu_nombres")
 	private String usuNombres;
@@ -111,11 +111,11 @@ public class Usuario implements Serializable {
 		this.usuCorreo = usuCorreo;
 	}
 
-	public byte[] getUsuImgperfil() {
+	public String getUsuImgperfil() {
 		return this.usuImgperfil;
 	}
 
-	public void setUsuImgperfil(byte[] usuImgperfil) {
+	public void setUsuImgperfil(String usuImgperfil) {
 		this.usuImgperfil = usuImgperfil;
 	}
 

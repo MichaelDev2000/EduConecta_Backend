@@ -12,4 +12,5 @@ public interface IUsuarioService {
 	boolean registrarUsuario(Usuario usuario);
 	boolean borrarUsuarioId(String id);
 	boolean actualizarUsuario(Usuario usuario);
+	boolean actualizarContrasena(String UsuarioId, String ContrasenaNew, String ContrasenaOld);
 }

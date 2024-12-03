@@ -1,0 +1,5 @@
+package com.educonecta.app.dao;
+
+public class NotificacionDao {
+
+}

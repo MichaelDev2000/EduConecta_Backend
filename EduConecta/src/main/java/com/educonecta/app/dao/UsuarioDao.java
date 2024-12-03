@@ -1,6 +1,7 @@
 package com.educonecta.app.dao;
 
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.educonecta.app.entity.Usuario;
 import com.educonecta.app.jpa.IUsuarioJpa;
-
+import com.educonecta.app.utils.Tools;
 
 @Repository
 public class UsuarioDao implements IUsuarioDao {
@@ -43,11 +44,16 @@ public class UsuarioDao implements IUsuarioDao {
 	@Override
 	public boolean registrarUsuario(Usuario usuario) {
 		UUID uuidROl = UUID.randomUUID();
-		
-		jdbcTemplate.update("INSERT INTO roles (rol_id, rol, usu_correo) VALUES (?,?, ?)",uuidROl.toString(), "ROLE_USERS", usuario.getUsuCorreo());
+		Random random = new Random();
+		int randomIndex = random.nextInt(Tools.avatares.length);
+		String randomAvatar = Tools.avatares[randomIndex];
+
+		jdbcTemplate.update("INSERT INTO roles (rol_id, rol, usu_correo) VALUES (?,?, ?)", uuidROl.toString(),
+				"ROLE_USERS", usuario.getUsuCorreo());
 		UUID uuid = UUID.randomUUID();
 		String contraseñaHasheada = passwordEncoder.encode(usuario.getUsuContrasena());
 		usuario.setUsuContrasena(contraseñaHasheada);
+		usuario.setUsuImgperfil(randomAvatar);
 		usuario.setUsuarioId(uuid.toString());
 		if (!jpa.save(usuario).equals(null))
 			return true;
@@ -76,26 +82,39 @@ public class UsuarioDao implements IUsuarioDao {
 
 	@Override
 	public Usuario buscarPorCorreo(String correo) {
-	    String sql = "SELECT * FROM usuarios WHERE usu_correo = ?";
-	    try {
-	        return jdbcTemplate.queryForObject(sql, (rs, rowNum) -> {
-	            Usuario usuario = new Usuario();
-	            usuario.setUsuarioId(rs.getString("usuario_id"));
-	            usuario.setUsuCorreo(rs.getString("usu_correo"));
-	            usuario.setUsuContrasena(rs.getString("usu_contrasena"));
-	            usuario.setUsuNombres(rs.getString("usu_nombres"));
-	            usuario.setUsuApellidos(rs.getString("usu_apellidos"));
-	            usuario.setUsuBiografia(rs.getString("usu_biografia"));
-	            usuario.setUsuImgperfil(rs.getBytes("usu_imgperfil"));
-	            usuario.setUsuStatus(rs.getInt("usu_status"));
-	            return usuario;
-	        }, correo); // Nota cómo el argumento se pasa directamente aquí
-	    } catch (Exception e) {
-	        // Manejar el caso cuando no se encuentra el usuario
-	        System.err.println("Usuario no encontrado: " + e.getMessage());
-	        return null;
-	    }
+		String sql = "SELECT * FROM usuarios WHERE usu_correo = ?";
+		try {
+			return jdbcTemplate.queryForObject(sql, (rs, rowNum) -> {
+				Usuario usuario = new Usuario();
+				usuario.setUsuarioId(rs.getString("usuario_id"));
+				usuario.setUsuCorreo(rs.getString("usu_correo"));
+				usuario.setUsuContrasena(rs.getString("usu_contrasena"));
+				usuario.setUsuNombres(rs.getString("usu_nombres"));
+				usuario.setUsuApellidos(rs.getString("usu_apellidos"));
+				usuario.setUsuBiografia(rs.getString("usu_biografia"));
+				usuario.setUsuImgperfil(rs.getString("usu_imgperfil"));
+				usuario.setUsuStatus(rs.getInt("usu_status"));
+				return usuario;
+			}, correo); // Nota cómo el argumento se pasa directamente aquí
+		} catch (Exception e) {
+			// Manejar el caso cuando no se encuentra el usuario
+			System.err.println("Usuario no encontrado: " + e.getMessage());
+			return null;
+		}
 	}
-	
+
+	@Override
+	public boolean actualizarContrasena(String UsuarioId, String ContrasenaNew, String ContrasenaOld) {
+		Usuario usuarioEditPass = jpa.findById(UsuarioId).get();
+		if (passwordEncoder.matches(ContrasenaOld, usuarioEditPass.getUsuContrasena())) {
+			String contraseñaNewHash = passwordEncoder.encode(ContrasenaNew);
+			usuarioEditPass.setUsuContrasena(contraseñaNewHash);
+			if (!jpa.save(usuarioEditPass).equals(null))
+				return true;
+		} else {
+			return false;
+		}
+		return false;
+	}
 
 }
