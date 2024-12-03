@@ -1057,3 +1057,14 @@
 2024-12-03 11:49:29,399 [Worker-75: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\uestudiantes\Documents\EduConecta\EduConecta\src\test\resources
 2024-12-03 11:50:09,799 [Worker-4: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
 2024-12-03 14:58:47,956 [Worker-2: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2024-12-03 14:59:51,674 [Worker-19: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update started
+2024-12-03 14:59:54,308 [Worker-19: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.educonecta.app:EduConecta:1.0 @ C:\Users\TheEnginner\Downloads\EduConecta\EduConecta\pom.xml.
+2024-12-03 14:59:59,430 [Worker-19: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /EduConecta/src/main/java
+2024-12-03 14:59:59,433 [Worker-19: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /EduConecta/src/main/resources
+2024-12-03 14:59:59,434 [Worker-19: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /EduConecta/src/main/resources
+2024-12-03 14:59:59,435 [Worker-19: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /EduConecta/src/test/java
+2024-12-03 14:59:59,436 [Worker-19: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /EduConecta/src/test/resources
+2024-12-03 15:00:00,656 [Worker-19: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update completed for 1 poms: local refresh takes 0,00 sec, refresh facades takes 6,00 sec, update config takes 1,00 sec 
+2024-12-03 15:00:04,457 [Worker-24: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-12-03 15:00:04,476 [Worker-24: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-12-03 15:00:04,483 [Worker-24: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\TheEnginner\Downloads\EduConecta\EduConecta\src\test\resources
