@@ -1,0 +1,30 @@
+package com.educonecta.app.entity;
+
+import java.io.Serializable;
+import jakarta.persistence.*;
+
+
+/**
+ * The persistent class for the temasinteresusuario database table.
+ * 
+ */
+@Entity
+@NamedQuery(name="Temasinteresusuario.findAll", query="SELECT t FROM Temasinteresusuario t")
+public class Temasinteresusuario implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@EmbeddedId
+	private TemasinteresusuarioPK id;
+
+	public Temasinteresusuario() {
+	}
+
+	public TemasinteresusuarioPK getId() {
+		return this.id;
+	}
+
+	public void setId(TemasinteresusuarioPK id) {
+		this.id = id;
+	}
+
+}

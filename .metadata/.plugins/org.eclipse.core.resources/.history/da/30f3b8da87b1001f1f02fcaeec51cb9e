@@ -1,0 +1,42 @@
+package com.educonecta.app.dao;
+
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+import com.educonecta.app.entity.Rol;
+
+@Repository
+public class RolDao implements IRolesDao {
+
+	@Override
+	public List<Rol> ListarRoles() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Rol buscarPorId(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean registrarRol(Rol rol) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean borrarRol(String id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean actualizarRol(Rol rol) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+}

@@ -1,0 +1,89 @@
+package com.educonecta.app.entity;
+
+import java.io.Serializable;
+import jakarta.persistence.*;
+import java.util.Date;
+import java.sql.Timestamp;
+
+
+/**
+ * The persistent class for the grupos database table.
+ * 
+ */
+@Entity
+@Table(name="grupos")
+@NamedQuery(name="Grupo.findAll", query="SELECT g FROM Grupo g")
+public class Grupo implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="grupo_id")
+	private String grupoId;
+
+	@Column(name="created_at")
+	private Timestamp createdAt;
+
+	private String descripcion;
+
+	@Lob
+	private byte[] imggrupo;
+
+	private String nombreGrupo;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="updated_at")
+	private Date updatedAt;
+
+	public Grupo() {
+	}
+
+	public String getGrupoId() {
+		return this.grupoId;
+	}
+
+	public void setGrupoId(String grupoId) {
+		this.grupoId = grupoId;
+	}
+
+	public Timestamp getCreatedAt() {
+		return this.createdAt;
+	}
+
+	public void setCreatedAt(Timestamp createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public String getDescripcion() {
+		return this.descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public byte[] getImggrupo() {
+		return this.imggrupo;
+	}
+
+	public void setImggrupo(byte[] imggrupo) {
+		this.imggrupo = imggrupo;
+	}
+
+	public String getNombreGrupo() {
+		return this.nombreGrupo;
+	}
+
+	public void setNombreGrupo(String nombreGrupo) {
+		this.nombreGrupo = nombreGrupo;
+	}
+
+	public Date getUpdatedAt() {
+		return this.updatedAt;
+	}
+
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+}

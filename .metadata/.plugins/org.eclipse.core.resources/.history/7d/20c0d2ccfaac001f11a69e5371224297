@@ -1,0 +1,87 @@
+package com.educonecta.app.entity;
+
+import java.io.Serializable;
+import jakarta.persistence.*;
+import java.sql.Timestamp;
+
+
+/**
+ * The persistent class for the notificaciones database table.
+ * 
+ */
+@Entity
+@Table(name="notificaciones")
+@NamedQuery(name="Notificacion.findAll", query="SELECT n FROM Notificacion n")
+public class Notificacion implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="notificacion_id")
+	private String notificacionId;
+
+	@Column(name="created_at")
+	private Timestamp createdAt;
+
+	@Column(name="referencia_id")
+	private String referenciaId;
+
+	private String tipo;
+
+	@Column(name="usuario_id")
+	private String usuarioId;
+
+	private byte vista;
+
+	public Notificacion() {
+	}
+
+	public String getNotificacionId() {
+		return this.notificacionId;
+	}
+
+	public void setNotificacionId(String notificacionId) {
+		this.notificacionId = notificacionId;
+	}
+
+	public Timestamp getCreatedAt() {
+		return this.createdAt;
+	}
+
+	public void setCreatedAt(Timestamp createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public String getReferenciaId() {
+		return this.referenciaId;
+	}
+
+	public void setReferenciaId(String referenciaId) {
+		this.referenciaId = referenciaId;
+	}
+
+	public String getTipo() {
+		return this.tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	public String getUsuarioId() {
+		return this.usuarioId;
+	}
+
+	public void setUsuarioId(String usuarioId) {
+		this.usuarioId = usuarioId;
+	}
+
+	public byte getVista() {
+		return this.vista;
+	}
+
+	public void setVista(byte vista) {
+		this.vista = vista;
+	}
+
+}

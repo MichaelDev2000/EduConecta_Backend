@@ -1,0 +1,88 @@
+package com.educonecta.app.entity;
+
+import java.io.Serializable;
+import jakarta.persistence.*;
+import java.sql.Timestamp;
+
+
+/**
+ * The persistent class for the mensageschats database table.
+ * 
+ */
+@Entity
+@Table(name="mensageschats")
+@NamedQuery(name="Mensageschat.findAll", query="SELECT m FROM Mensageschat m")
+public class Mensageschat implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="mensage_id")
+	private String mensageId;
+
+	@Column(name="chat_id")
+	private String chatId;
+
+	private String contenido;
+
+	@Column(name="created_at")
+	private Timestamp createdAt;
+
+	private String enviadorUser_id;
+
+	//bi-directional one-to-one association to Chat
+	@OneToOne(mappedBy="mensageschat")
+	private Chat chat;
+
+	public Mensageschat() {
+	}
+
+	public String getMensageId() {
+		return this.mensageId;
+	}
+
+	public void setMensageId(String mensageId) {
+		this.mensageId = mensageId;
+	}
+
+	public String getChatId() {
+		return this.chatId;
+	}
+
+	public void setChatId(String chatId) {
+		this.chatId = chatId;
+	}
+
+	public String getContenido() {
+		return this.contenido;
+	}
+
+	public void setContenido(String contenido) {
+		this.contenido = contenido;
+	}
+
+	public Timestamp getCreatedAt() {
+		return this.createdAt;
+	}
+
+	public void setCreatedAt(Timestamp createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public String getEnviadorUser_id() {
+		return this.enviadorUser_id;
+	}
+
+	public void setEnviadorUser_id(String enviadorUser_id) {
+		this.enviadorUser_id = enviadorUser_id;
+	}
+
+	public Chat getChat() {
+		return this.chat;
+	}
+
+	public void setChat(Chat chat) {
+		this.chat = chat;
+	}
+
+}

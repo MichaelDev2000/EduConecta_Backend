@@ -1,0 +1,15 @@
+package com.educonecta.app.dao;
+
+import java.util.List;
+
+
+import com.educonecta.app.entity.Usuario;
+
+public interface IUsuarioDao {
+	List<Usuario> ListarUsuarios();
+	Usuario buscarPorId(String id);
+	Usuario buscarPorCorreo(String correo);
+	boolean registrarUsuario(Usuario usuario);
+	boolean borrarUsuario(String id);
+	boolean actualizarUsuario(Usuario usuario);
+}

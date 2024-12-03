@@ -1,0 +1,5 @@
+package com.educonecta.app.dao;
+
+public interface IRolesDao {
+
+}

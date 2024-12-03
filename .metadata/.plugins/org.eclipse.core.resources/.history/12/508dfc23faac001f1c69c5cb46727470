@@ -1,0 +1,80 @@
+package com.educonecta.app.entity;
+
+import java.io.Serializable;
+import jakarta.persistence.*;
+import java.sql.Timestamp;
+
+
+/**
+ * The persistent class for the chats database table.
+ * 
+ */
+@Entity
+@Table(name="chats")
+@NamedQuery(name="Chat.findAll", query="SELECT c FROM Chat c")
+public class Chat implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="chat_id")
+	private String chatId;
+
+	@Column(name="created_at")
+	private Timestamp createdAt;
+
+	@Column(name="user1_id")
+	private String user1Id;
+
+	@Column(name="user2_id")
+	private String user2Id;
+
+	//bi-directional one-to-one association to Mensageschat
+	@OneToOne
+	@JoinColumn(name="chat_id")
+	private Mensageschat mensageschat;
+
+	public Chat() {
+	}
+
+	public String getChatId() {
+		return this.chatId;
+	}
+
+	public void setChatId(String chatId) {
+		this.chatId = chatId;
+	}
+
+	public Timestamp getCreatedAt() {
+		return this.createdAt;
+	}
+
+	public void setCreatedAt(Timestamp createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public String getUser1Id() {
+		return this.user1Id;
+	}
+
+	public void setUser1Id(String user1Id) {
+		this.user1Id = user1Id;
+	}
+
+	public String getUser2Id() {
+		return this.user2Id;
+	}
+
+	public void setUser2Id(String user2Id) {
+		this.user2Id = user2Id;
+	}
+
+	public Mensageschat getMensageschat() {
+		return this.mensageschat;
+	}
+
+	public void setMensageschat(Mensageschat mensageschat) {
+		this.mensageschat = mensageschat;
+	}
+
+}
