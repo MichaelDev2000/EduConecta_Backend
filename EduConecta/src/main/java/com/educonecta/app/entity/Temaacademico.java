@@ -19,6 +19,10 @@ public class Temaacademico implements Serializable {
 	@Column(name="tema_id")
 	private String temaId;
 
+	private String descripcion;
+
+	private String nombre;
+
 	@Column(name="tema_descripcion")
 	private String temaDescripcion;
 
@@ -44,6 +48,22 @@ public class Temaacademico implements Serializable {
 		this.temaId = temaId;
 	}
 
+	public String getDescripcion() {
+		return this.descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public String getNombre() {
+		return this.nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
 	public String getTemaDescripcion() {
 		return this.temaDescripcion;
 	}
@@ -60,36 +80,5 @@ public class Temaacademico implements Serializable {
 		this.temaNombre = temaNombre;
 	}
 
-	public List<Publicacion> getPublicaciones() {
-		return this.publicaciones;
-	}
-
-	public void setPublicaciones(List<Publicacion> publicaciones) {
-		this.publicaciones = publicaciones;
-	}
-
-
-
-	public List<Temasinteresusuario> getTemasinteresusuarios() {
-		return this.temasinteresusuarios;
-	}
-
-	public void setTemasinteresusuarios(List<Temasinteresusuario> temasinteresusuarios) {
-		this.temasinteresusuarios = temasinteresusuarios;
-	}
-
-	public Temasinteresusuario addTemasinteresusuario(Temasinteresusuario temasinteresusuario) {
-		getTemasinteresusuarios().add(temasinteresusuario);
-		temasinteresusuario.setTemasacademico(this);
-
-		return temasinteresusuario;
-	}
-
-	public Temasinteresusuario removeTemasinteresusuario(Temasinteresusuario temasinteresusuario) {
-		getTemasinteresusuarios().remove(temasinteresusuario);
-		temasinteresusuario.setTemasacademico(null);
-
-		return temasinteresusuario;
-	}
 
 }

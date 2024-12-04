@@ -1,0 +1,474 @@
+package com.educonecta.app.entity;
+
+import java.io.Serializable;
+import jakarta.persistence.*;
+import java.util.Date;
+import java.sql.Timestamp;
+import java.util.List;
+
+
+/**
+ * The persistent class for the usuarios database table.
+ * 
+ */
+@Entity
+@Table(name="usuarios")
+@NamedQuery(name="Usuario.findAll", query="SELECT u FROM Usuario u")
+public class Usuario implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@Column(name="usuario_id")
+	private String usuarioId;
+
+	@Column(name="created_at")
+	private Timestamp createdAt;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="updated_at")
+	private Date updatedAt;
+
+	@Column(name="usu_apellidos")
+	private String usuApellidos;
+
+	@Column(name="usu_biografia")
+	private String usuBiografia;
+
+	@Column(name="usu_contrasena")
+	private String usuContrasena;
+
+	@Column(name="usu_correo")
+	private String usuCorreo;
+
+	@Lob
+	@Column(name="usu_imgperfil")
+	private String usuImgperfil;
+
+	@Column(name="usu_nombres")
+	private String usuNombres;
+
+	@Column(name="usu_status")
+	private int usuStatus;
+
+	//bi-directional many-to-one association to Amistad
+	@OneToMany(mappedBy="usuario1")
+	private List<Amistad> amistades1;
+
+	//bi-directional many-to-one association to Amistad
+	@OneToMany(mappedBy="usuario2")
+	private List<Amistad> amistades2;
+
+	//bi-directional many-to-one association to Chat
+	@OneToMany(mappedBy="usuario1")
+	private List<Chat> chats1;
+
+	//bi-directional many-to-one association to Chat
+	@OneToMany(mappedBy="usuario2")
+	private List<Chat> chats2;
+
+	//bi-directional many-to-one association to Comentario
+	@OneToMany(mappedBy="usuario")
+	private List<Comentario> comentarios;
+
+	//bi-directional many-to-one association to Like
+	@OneToMany(mappedBy="usuario")
+	private List<Like> likes;
+
+	//bi-directional many-to-one association to Mensageschat
+	@OneToMany(mappedBy="usuario")
+	private List<Mensageschat> mensageschats;
+
+	//bi-directional many-to-one association to Miembrosgrupo
+	@OneToMany(mappedBy="usuario")
+	private List<Miembrosgrupo> miembrosgrupos;
+
+	//bi-directional many-to-one association to Notificacion
+	@OneToMany(mappedBy="usuario")
+	private List<Notificacion> notificaciones;
+
+	//bi-directional many-to-one association to Peticionesamistad
+	@OneToMany(mappedBy="usuario1")
+	private List<Peticionesamistad> peticionesamistads1;
+
+	//bi-directional many-to-one association to Peticionesamistad
+	@OneToMany(mappedBy="usuario2")
+	private List<Peticionesamistad> peticionesamistads2;
+
+	//bi-directional many-to-one association to Publicacion
+	@OneToMany(mappedBy="usuario")
+	private List<Publicacion> publicaciones;
+
+	//bi-directional many-to-one association to Temasinteresusuario
+	@OneToMany(mappedBy="usuario")
+	private List<Temasinteresusuario> temasinteresusuarios;
+
+	public Usuario() {
+	}
+
+	public String getUsuarioId() {
+		return this.usuarioId;
+	}
+
+	public void setUsuarioId(String usuarioId) {
+		this.usuarioId = usuarioId;
+	}
+
+	public Timestamp getCreatedAt() {
+		return this.createdAt;
+	}
+
+	public void setCreatedAt(Timestamp createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public Date getUpdatedAt() {
+		return this.updatedAt;
+	}
+
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+	public String getUsuApellidos() {
+		return this.usuApellidos;
+	}
+
+	public void setUsuApellidos(String usuApellidos) {
+		this.usuApellidos = usuApellidos;
+	}
+
+	public String getUsuBiografia() {
+		return this.usuBiografia;
+	}
+
+	public void setUsuBiografia(String usuBiografia) {
+		this.usuBiografia = usuBiografia;
+	}
+
+	public String getUsuContrasena() {
+		return this.usuContrasena;
+	}
+
+	public void setUsuContrasena(String usuContrasena) {
+		this.usuContrasena = usuContrasena;
+	}
+
+	public String getUsuCorreo() {
+		return this.usuCorreo;
+	}
+
+	public void setUsuCorreo(String usuCorreo) {
+		this.usuCorreo = usuCorreo;
+	}
+
+	public String getUsuImgperfil() {
+		return this.usuImgperfil;
+	}
+
+	public void setUsuImgperfil(String usuImgperfil) {
+		this.usuImgperfil = usuImgperfil;
+	}
+
+	public String getUsuNombres() {
+		return this.usuNombres;
+	}
+
+	public void setUsuNombres(String usuNombres) {
+		this.usuNombres = usuNombres;
+	}
+
+	public int getUsuStatus() {
+		return this.usuStatus;
+	}
+
+	public void setUsuStatus(int usuStatus) {
+		this.usuStatus = usuStatus;
+	}
+
+	public List<Amistad> getAmistades1() {
+		return this.amistades1;
+	}
+
+	public void setAmistades1(List<Amistad> amistades1) {
+		this.amistades1 = amistades1;
+	}
+
+	public Amistad addAmistades1(Amistad amistades1) {
+		getAmistades1().add(amistades1);
+		amistades1.setUsuario1(this);
+
+		return amistades1;
+	}
+
+	public Amistad removeAmistades1(Amistad amistades1) {
+		getAmistades1().remove(amistades1);
+		amistades1.setUsuario1(null);
+
+		return amistades1;
+	}
+
+	public List<Amistad> getAmistades2() {
+		return this.amistades2;
+	}
+
+	public void setAmistades2(List<Amistad> amistades2) {
+		this.amistades2 = amistades2;
+	}
+
+	public Amistad addAmistades2(Amistad amistades2) {
+		getAmistades2().add(amistades2);
+		amistades2.setUsuario2(this);
+
+		return amistades2;
+	}
+
+	public Amistad removeAmistades2(Amistad amistades2) {
+		getAmistades2().remove(amistades2);
+		amistades2.setUsuario2(null);
+
+		return amistades2;
+	}
+
+	public List<Chat> getChats1() {
+		return this.chats1;
+	}
+
+	public void setChats1(List<Chat> chats1) {
+		this.chats1 = chats1;
+	}
+
+	public Chat addChats1(Chat chats1) {
+		getChats1().add(chats1);
+		chats1.setUsuario1(this);
+
+		return chats1;
+	}
+
+	public Chat removeChats1(Chat chats1) {
+		getChats1().remove(chats1);
+		chats1.setUsuario1(null);
+
+		return chats1;
+	}
+
+	public List<Chat> getChats2() {
+		return this.chats2;
+	}
+
+	public void setChats2(List<Chat> chats2) {
+		this.chats2 = chats2;
+	}
+
+	public Chat addChats2(Chat chats2) {
+		getChats2().add(chats2);
+		chats2.setUsuario2(this);
+
+		return chats2;
+	}
+
+	public Chat removeChats2(Chat chats2) {
+		getChats2().remove(chats2);
+		chats2.setUsuario2(null);
+
+		return chats2;
+	}
+
+	public List<Comentario> getComentarios() {
+		return this.comentarios;
+	}
+
+	public void setComentarios(List<Comentario> comentarios) {
+		this.comentarios = comentarios;
+	}
+
+	public Comentario addComentario(Comentario comentario) {
+		getComentarios().add(comentario);
+		comentario.setUsuario(this);
+
+		return comentario;
+	}
+
+	public Comentario removeComentario(Comentario comentario) {
+		getComentarios().remove(comentario);
+		comentario.setUsuario(null);
+
+		return comentario;
+	}
+
+	public List<Like> getLikes() {
+		return this.likes;
+	}
+
+	public void setLikes(List<Like> likes) {
+		this.likes = likes;
+	}
+
+	public Like addLike(Like like) {
+		getLikes().add(like);
+		like.setUsuario(this);
+
+		return like;
+	}
+
+	public Like removeLike(Like like) {
+		getLikes().remove(like);
+		like.setUsuario(null);
+
+		return like;
+	}
+
+	public List<Mensageschat> getMensageschats() {
+		return this.mensageschats;
+	}
+
+	public void setMensageschats(List<Mensageschat> mensageschats) {
+		this.mensageschats = mensageschats;
+	}
+
+	public Mensageschat addMensageschat(Mensageschat mensageschat) {
+		getMensageschats().add(mensageschat);
+		mensageschat.setUsuario(this);
+
+		return mensageschat;
+	}
+
+	public Mensageschat removeMensageschat(Mensageschat mensageschat) {
+		getMensageschats().remove(mensageschat);
+		mensageschat.setUsuario(null);
+
+		return mensageschat;
+	}
+
+	public List<Miembrosgrupo> getMiembrosgrupos() {
+		return this.miembrosgrupos;
+	}
+
+	public void setMiembrosgrupos(List<Miembrosgrupo> miembrosgrupos) {
+		this.miembrosgrupos = miembrosgrupos;
+	}
+
+	public Miembrosgrupo addMiembrosgrupo(Miembrosgrupo miembrosgrupo) {
+		getMiembrosgrupos().add(miembrosgrupo);
+		miembrosgrupo.setUsuario(this);
+
+		return miembrosgrupo;
+	}
+
+	public Miembrosgrupo removeMiembrosgrupo(Miembrosgrupo miembrosgrupo) {
+		getMiembrosgrupos().remove(miembrosgrupo);
+		miembrosgrupo.setUsuario(null);
+
+		return miembrosgrupo;
+	}
+
+	public List<Notificacion> getNotificaciones() {
+		return this.notificaciones;
+	}
+
+	public void setNotificaciones(List<Notificacion> notificaciones) {
+		this.notificaciones = notificaciones;
+	}
+
+	public Notificacion addNotificacione(Notificacion notificacione) {
+		getNotificaciones().add(notificacione);
+		notificacione.setUsuario(this);
+
+		return notificacione;
+	}
+
+	public Notificacion removeNotificacione(Notificacion notificacione) {
+		getNotificaciones().remove(notificacione);
+		notificacione.setUsuario(null);
+
+		return notificacione;
+	}
+
+	public List<Peticionesamistad> getPeticionesamistads1() {
+		return this.peticionesamistads1;
+	}
+
+	public void setPeticionesamistads1(List<Peticionesamistad> peticionesamistads1) {
+		this.peticionesamistads1 = peticionesamistads1;
+	}
+
+	public Peticionesamistad addPeticionesamistads1(Peticionesamistad peticionesamistads1) {
+		getPeticionesamistads1().add(peticionesamistads1);
+		peticionesamistads1.setUsuario1(this);
+
+		return peticionesamistads1;
+	}
+
+	public Peticionesamistad removePeticionesamistads1(Peticionesamistad peticionesamistads1) {
+		getPeticionesamistads1().remove(peticionesamistads1);
+		peticionesamistads1.setUsuario1(null);
+
+		return peticionesamistads1;
+	}
+
+	public List<Peticionesamistad> getPeticionesamistads2() {
+		return this.peticionesamistads2;
+	}
+
+	public void setPeticionesamistads2(List<Peticionesamistad> peticionesamistads2) {
+		this.peticionesamistads2 = peticionesamistads2;
+	}
+
+	public Peticionesamistad addPeticionesamistads2(Peticionesamistad peticionesamistads2) {
+		getPeticionesamistads2().add(peticionesamistads2);
+		peticionesamistads2.setUsuario2(this);
+
+		return peticionesamistads2;
+	}
+
+	public Peticionesamistad removePeticionesamistads2(Peticionesamistad peticionesamistads2) {
+		getPeticionesamistads2().remove(peticionesamistads2);
+		peticionesamistads2.setUsuario2(null);
+
+		return peticionesamistads2;
+	}
+
+	public List<Publicacion> getPublicaciones() {
+		return this.publicaciones;
+	}
+
+	public void setPublicaciones(List<Publicacion> publicaciones) {
+		this.publicaciones = publicaciones;
+	}
+
+	public Publicacion addPublicacione(Publicacion publicacione) {
+		getPublicaciones().add(publicacione);
+		publicacione.setUsuario(this);
+
+		return publicacione;
+	}
+
+	public Publicacion removePublicacione(Publicacion publicacione) {
+		getPublicaciones().remove(publicacione);
+		publicacione.setUsuario(null);
+
+		return publicacione;
+	}
+
+	public List<Temasinteresusuario> getTemasinteresusuarios() {
+		return this.temasinteresusuarios;
+	}
+
+	public void setTemasinteresusuarios(List<Temasinteresusuario> temasinteresusuarios) {
+		this.temasinteresusuarios = temasinteresusuarios;
+	}
+
+	public Temasinteresusuario addTemasinteresusuario(Temasinteresusuario temasinteresusuario) {
+		getTemasinteresusuarios().add(temasinteresusuario);
+		temasinteresusuario.setUsuario(this);
+
+		return temasinteresusuario;
+	}
+
+	public Temasinteresusuario removeTemasinteresusuario(Temasinteresusuario temasinteresusuario) {
+		getTemasinteresusuarios().remove(temasinteresusuario);
+		temasinteresusuario.setUsuario(null);
+
+		return temasinteresusuario;
+	}
+
+}
