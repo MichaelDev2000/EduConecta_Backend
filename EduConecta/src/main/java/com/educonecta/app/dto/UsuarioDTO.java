@@ -9,7 +9,7 @@ public class UsuarioDTO {
     private String usuApellidos;
     private String usuBiografia;
     private String usuCorreo;
-    private byte[] usuImgperfil;
+    private String usuImgperfil;
     private String usuNombres;
     private int usuStatus;
     
@@ -38,10 +38,10 @@ public class UsuarioDTO {
     public void setUsuCorreo(String usuCorreo) {
         this.usuCorreo = usuCorreo;
     }
-    public byte[] getUsuImgperfil() {
+    public String getUsuImgperfil() {
         return usuImgperfil;
     }
-    public void setUsuImgperfil(byte[] usuImgperfil) {
+    public void setUsuImgperfil(String usuImgperfil) {
         this.usuImgperfil = usuImgperfil;
     }
     public String getUsuNombres() {

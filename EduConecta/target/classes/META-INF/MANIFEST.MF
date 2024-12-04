@@ -1,9 +1,5 @@
 Manifest-Version: 1.0
-<<<<<<< HEAD
-Build-Jdk-Spec: 23
-=======
 Build-Jdk-Spec: 21
->>>>>>> 72a1276e7d5643e4e28e58b74f2c6b8ad85ff910
 Implementation-Title: EduConecta
 Implementation-Version: 1.0
 Created-By: Maven Integration for Eclipse
