@@ -1,6 +1,7 @@
 package com.educonecta.app.dao;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -28,6 +29,8 @@ public class PublicacionDao implements IPublicacionesDao {
 	@Override
 	public boolean registrarPublicacion(Publicacion publicacion) {
 		// TODO Auto-generated method stub
+		UUID uuid = UUID.randomUUID();
+		publicacion.setPostId(uuid.toString());
 		if(!jpa.save(publicacion).equals(null)) return true;
 		return false;
 	}

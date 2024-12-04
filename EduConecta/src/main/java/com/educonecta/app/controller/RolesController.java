@@ -52,8 +52,9 @@ public class RolesController {
 	@GetMapping(value = "Rol-id")
 	public ResponseEntity<?> rolById(@RequestParam String id) {
 		Rol rolFind = service.buscarRolPorId(id);
-
-		return new ResponseEntity<Rol>(rolFind, HttpStatus.OK);
-
+		if(rolFind != null) {
+			return new ResponseEntity<Rol>(rolFind, HttpStatus.OK);
+		}
+		return new ResponseEntity<String>("Error al obtener rol con id "+id+".", HttpStatus.CONFLICT);
 	}
 }

@@ -9,6 +9,8 @@ public interface ITemaAcademicoDao {
 	List<Temaacademico> ListarTemas();
 	Temaacademico buscarPorId(String id);
 	boolean registrarTema(Temaacademico tema);
+
 	boolean borrarTema(String id);
+
 	boolean actualizarTema(Temaacademico tema);
 }

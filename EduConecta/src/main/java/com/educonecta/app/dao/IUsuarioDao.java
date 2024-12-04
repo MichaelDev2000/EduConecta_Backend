@@ -12,4 +12,5 @@ public interface IUsuarioDao {
 	boolean registrarUsuario(Usuario usuario);
 	boolean borrarUsuario(String id);
 	boolean actualizarUsuario(Usuario usuario);
+	boolean actualizarContrasena(String UsuarioId, String ContrasenaNew, String ContrasenaOld);
 }

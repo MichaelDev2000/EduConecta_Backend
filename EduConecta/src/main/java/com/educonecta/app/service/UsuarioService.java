@@ -57,4 +57,10 @@ public class UsuarioService implements IUsuarioService {
         
     }
 
+	@Override
+	public boolean actualizarContrasena(String UsuarioId, String ContrasenaNew, String ContrasenaOld) {
+		// TODO Auto-generated method stub
+		return dao.actualizarContrasena(UsuarioId, ContrasenaNew, ContrasenaOld);
+	}
+
 }

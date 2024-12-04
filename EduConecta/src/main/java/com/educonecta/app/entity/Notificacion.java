@@ -26,7 +26,7 @@ public class Notificacion implements Serializable {
 	private String notiTipo;
 
 	@Column(name="noti_vista")
-	private byte notiVista;
+	private String notiVista;
 
 	@Column(name="referencia_id")
 	private String referenciaId;
@@ -63,11 +63,11 @@ public class Notificacion implements Serializable {
 		this.notiTipo = notiTipo;
 	}
 
-	public byte getNotiVista() {
+	public String getNotiVista() {
 		return this.notiVista;
 	}
 
-	public void setNotiVista(byte notiVista) {
+	public void setNotiVista(String notiVista) {
 		this.notiVista = notiVista;
 	}
 
