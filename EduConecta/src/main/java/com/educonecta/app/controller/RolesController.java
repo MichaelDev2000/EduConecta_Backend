@@ -15,7 +15,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
 import com.educonecta.app.entity.Rol;
-import com.educonecta.app.entity.Usuario;
 import com.educonecta.app.service.IRolService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -50,7 +49,7 @@ public class RolesController {
 	}
 
 	@Operation(summary = "Este endpoint nos permite recuperar un Rol por su Nombre")
-	@GetMapping(value = "Usuario-id")
+	@GetMapping(value = "Rol-id")
 	public ResponseEntity<?> rolById(@RequestParam String id) {
 		Rol rolFind = service.buscarRolPorId(id);
 
