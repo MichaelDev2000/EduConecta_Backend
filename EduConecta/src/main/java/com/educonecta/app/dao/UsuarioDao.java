@@ -55,6 +55,7 @@ public class UsuarioDao implements IUsuarioDao {
 		usuario.setUsuContrasena(contraseñaHasheada);
 		usuario.setUsuImgperfil(randomAvatar);
 		usuario.setUsuarioId(uuid.toString());
+		usuario.setUsuStatus(1);
 		if (!jpa.save(usuario).equals(null))
 			return true;
 		return false;

@@ -29,13 +29,6 @@ public class Temaacademico implements Serializable {
 	@Column(name="tema_nombre")
 	private String temaNombre;
 
-	//bi-directional many-to-one association to Publicacion
-	@OneToMany(mappedBy="temasacademico")
-	private List<Publicacion> publicaciones;
-
-	//bi-directional many-to-one association to Temasinteresusuario
-	@OneToMany(mappedBy="temasacademico")
-	private List<Temasinteresusuario> temasinteresusuarios;
 
 	public Temaacademico() {
 	}
@@ -79,6 +72,7 @@ public class Temaacademico implements Serializable {
 	public void setTemaNombre(String temaNombre) {
 		this.temaNombre = temaNombre;
 	}
+
 
 
 }

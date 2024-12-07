@@ -50,57 +50,6 @@ public class Usuario implements Serializable {
 	@Column(name="usu_status")
 	private int usuStatus;
 
-	//bi-directional many-to-one association to Amistad
-	@OneToMany(mappedBy="usuario1")
-	private List<Amistad> amistades1;
-
-	//bi-directional many-to-one association to Amistad
-	@OneToMany(mappedBy="usuario2")
-	private List<Amistad> amistades2;
-
-	//bi-directional many-to-one association to Chat
-	@OneToMany(mappedBy="usuario1")
-	private List<Chat> chats1;
-
-	//bi-directional many-to-one association to Chat
-	@OneToMany(mappedBy="usuario2")
-	private List<Chat> chats2;
-
-	//bi-directional many-to-one association to Comentario
-	@OneToMany(mappedBy="usuario")
-	private List<Comentario> comentarios;
-
-	//bi-directional many-to-one association to Like
-	@OneToMany(mappedBy="usuario")
-	private List<Like> likes;
-
-	//bi-directional many-to-one association to Mensageschat
-	@OneToMany(mappedBy="usuario")
-	private List<Mensageschat> mensageschats;
-
-	//bi-directional many-to-one association to Miembrosgrupo
-	@OneToMany(mappedBy="usuario")
-	private List<Miembrosgrupo> miembrosgrupos;
-
-	//bi-directional many-to-one association to Notificacion
-	@OneToMany(mappedBy="usuario")
-	private List<Notificacion> notificaciones;
-
-	//bi-directional many-to-one association to Peticionesamistad
-	@OneToMany(mappedBy="usuario1")
-	private List<Peticionesamistad> peticionesamistads1;
-
-	//bi-directional many-to-one association to Peticionesamistad
-	@OneToMany(mappedBy="usuario2")
-	private List<Peticionesamistad> peticionesamistads2;
-
-	//bi-directional many-to-one association to Publicacion
-	@OneToMany(mappedBy="usuario")
-	private List<Publicacion> publicaciones;
-
-	//bi-directional many-to-one association to Temasinteresusuario
-	@OneToMany(mappedBy="usuario")
-	private List<Temasinteresusuario> temasinteresusuarios;
 
 	public Usuario() {
 	}
