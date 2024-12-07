@@ -32,6 +32,12 @@ public class UsuarioController {
 	@Autowired
 	IUsuarioService servicio;
 
+	@Operation(summary="Este endpoint nos permite saludar y probar xd")
+	@GetMapping(value="Saludar")
+	public ResponseEntity<String> saludar(){
+		return new ResponseEntity<Strin>("Holaaaaa si funciona",HttpStatus.OK);
+	}
+
 	@Operation(summary = "Este endpoint permite crear o registrar un usuario.")
 	@PostMapping(value = "registrar", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> RegistrarUsuario(@RequestBody Usuario usuario) {
