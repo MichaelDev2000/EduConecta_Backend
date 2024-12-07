@@ -35,7 +35,7 @@ public class UsuarioController {
 	@Operation(summary="Este endpoint nos permite saludar y probar xd")
 	@GetMapping(value="Saludar")
 	public ResponseEntity<String> saludar(){
-		return new ResponseEntity<Strin>("Holaaaaa si funciona",HttpStatus.OK);
+		return new ResponseEntity<String>("Holaaaaa si funciona",HttpStatus.OK);
 	}
 
 	@Operation(summary = "Este endpoint permite crear o registrar un usuario.")
