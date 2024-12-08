@@ -1,8 +1,14 @@
 package com.educonecta.app.entity;
 
 import java.io.Serializable;
+
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
+
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.sql.Timestamp;
 
 
@@ -23,8 +29,10 @@ public class Publicacion implements Serializable {
 	@Column(name="created_at")
 	private Timestamp createdAt;
 
-	@Column(name="grupo_id")
-	private String grupoId;
+	
+	@ManyToOne
+	@JoinColumn(name="grupo_id")
+	private Grupo grupoId;
 
 	@Column(name="post_contenido")
 	private String postContenido;
@@ -33,15 +41,14 @@ public class Publicacion implements Serializable {
 	@Column(name="post_imgpost")
 	private String postImgpost;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="updated_at")
-	private Date updatedAt;
-
-	@Column(name="usuario_id")
-	private String usuarioId;
+	@ManyToOne
+	@JsonProperty("usuarioId")
+	@JoinColumn(name="usuario_id")
+	private Usuario usuario;
 
 	//bi-directional many-to-one association to Temaacademico
 	@ManyToOne
+	@JsonProperty("temaId")
 	@JoinColumn(name="tema_id")
 	private Temaacademico temasacademico;
 
@@ -64,12 +71,13 @@ public class Publicacion implements Serializable {
 		this.createdAt = createdAt;
 	}
 
-	public String getGrupoId() {
-		return this.grupoId;
+	public Grupo getGrupoId() {
+	    return this.grupoId;
 	}
 
-	public void setGrupoId(String grupoId) {
-		this.grupoId = grupoId;
+	// Setter para grupoId (entidad Grupo)
+	public void setGrupoId(Grupo grupoId) {
+	    this.grupoId = grupoId;
 	}
 
 	public String getPostContenido() {
@@ -88,20 +96,12 @@ public class Publicacion implements Serializable {
 		this.postImgpost = postImgpost;
 	}
 
-	public Date getUpdatedAt() {
-		return this.updatedAt;
+	public Usuario getUsuario() {
+		return this.usuario;
 	}
 
-	public void setUpdatedAt(Date updatedAt) {
-		this.updatedAt = updatedAt;
-	}
-
-	public String getUsuarioId() {
-		return this.usuarioId;
-	}
-
-	public void setUsuarioId(String usuarioId) {
-		this.usuarioId = usuarioId;
+	public void setUsuario(Usuario usuario) {
+	    this.usuario = usuario;
 	}
 
 	public Temaacademico getTemasacademico() {
@@ -109,7 +109,7 @@ public class Publicacion implements Serializable {
 	}
 
 	public void setTemasacademico(Temaacademico temasacademico) {
-		this.temasacademico = temasacademico;
+	    this.temasacademico = temasacademico;
 	}
 
 }

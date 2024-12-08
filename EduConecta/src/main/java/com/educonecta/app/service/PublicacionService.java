@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.educonecta.app.dao.IPublicacionesDao;
+import com.educonecta.app.dto.PublicacionDTO;
 import com.educonecta.app.entity.Publicacion;
 
 @Service
@@ -42,6 +43,12 @@ public class PublicacionService implements IPublicacionService{
 	public boolean actualizarPublicacion(Publicacion publicacion) {
 		// TODO Auto-generated method stub
 		return dao.actualizarPublicacion(publicacion);
+	}
+
+	@Override
+	public List<PublicacionDTO> ListarPostOrdenados() {
+		// TODO Auto-generated method stub
+		return dao.ListarPublicacionesOrdenadas();
 	}
 	
 }

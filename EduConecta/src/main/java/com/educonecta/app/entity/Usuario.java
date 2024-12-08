@@ -24,10 +24,6 @@ public class Usuario implements Serializable {
 	@Column(name="created_at")
 	private Timestamp createdAt;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="updated_at")
-	private Date updatedAt;
-
 	@Column(name="usu_apellidos")
 	private String usuApellidos;
 
@@ -68,14 +64,6 @@ public class Usuario implements Serializable {
 
 	public void setCreatedAt(Timestamp createdAt) {
 		this.createdAt = createdAt;
-	}
-
-	public Date getUpdatedAt() {
-		return this.updatedAt;
-	}
-
-	public void setUpdatedAt(Date updatedAt) {
-		this.updatedAt = updatedAt;
 	}
 
 	public String getUsuApellidos() {

@@ -2,6 +2,7 @@ package com.educonecta.app.controller;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -26,6 +27,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Tag(name = "API de Usuarios", description = "Controlador para la gestion de usuarios.")
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping(value = "ApiUsers")
 public class UsuarioController {
 

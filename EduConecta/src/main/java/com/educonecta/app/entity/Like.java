@@ -30,7 +30,7 @@ public class Like implements Serializable {
 	//bi-directional many-to-one association to Publicacion
 	@ManyToOne
 	@JoinColumn(name="post_id")
-	private Publicacion publicacione;
+	private Publicacion publicacion;
 
 	public Like() {
 	}
@@ -58,13 +58,17 @@ public class Like implements Serializable {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+	
+	public String getPostId() {
+	    return publicacion.getPostId();
+	}
 
 	public Publicacion getPublicacione() {
-		return this.publicacione;
+		return this.publicacion;
 	}
 
 	public void setPublicacione(Publicacion publicacione) {
-		this.publicacione = publicacione;
+		this.publicacion = publicacione;
 	}
 
 }

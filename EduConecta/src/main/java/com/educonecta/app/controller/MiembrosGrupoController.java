@@ -7,6 +7,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +25,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Tag(name="API de Miembros de grupos")
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping(value="ApiMiembros")
 public class MiembrosGrupoController {
 	

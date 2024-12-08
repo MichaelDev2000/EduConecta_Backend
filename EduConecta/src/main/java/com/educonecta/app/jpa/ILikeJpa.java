@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.educonecta.app.entity.Like;
 
-public interface ILikeJpa extends JpaRepository<Like, String>{
-
+public interface ILikeJpa extends JpaRepository<Like, String> {
+	Long countByPublicacionPostId(String postId);
 }

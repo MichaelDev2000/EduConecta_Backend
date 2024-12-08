@@ -32,9 +32,6 @@ public class Grupo implements Serializable {
     @Column(name = "grupo_nombre")
     private String grupoNombre;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "updated_at")
-    private Date updatedAt;
 
     public Grupo() {
     }
@@ -78,14 +75,6 @@ public class Grupo implements Serializable {
 
     public void setGrupoNombre(String grupoNombre) {
         this.grupoNombre = grupoNombre;
-    }
-
-    public Date getUpdatedAt() {
-        return this.updatedAt;
-    }
-
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
     }
 
 }

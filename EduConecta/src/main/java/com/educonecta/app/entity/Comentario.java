@@ -29,22 +29,15 @@ public class Comentario implements Serializable {
 
 	//bi-directional many-to-one association to Publicacion
 	@ManyToOne
-	@JoinColumn(name="post_id")
-	private Publicacion publicacione;
+	@JoinColumn(name = "post_id")  
+	private Publicacion publicacion;
 
 	//bi-directional many-to-one association to Usuario
 	@ManyToOne
 	@JoinColumn(name="usuario_id")
 	private Usuario usuario;
 
-	//bi-directional one-to-one association to Comentario
-	@OneToOne
-	@JoinColumn(name="comentario_id")
-	private Comentario comentario1;
 
-	//bi-directional one-to-one association to Comentario
-	@OneToOne(mappedBy="comentario1")
-	private Comentario comentario2;
 
 	public Comentario() {
 	}
@@ -82,35 +75,22 @@ public class Comentario implements Serializable {
 	}
 
 	public Publicacion getPublicacione() {
-		return this.publicacione;
+		return this.publicacion;
 	}
 
 	public void setPublicacione(Publicacion publicacione) {
-		this.publicacione = publicacione;
+		this.publicacion = publicacione;
 	}
+	
+	public String getPostId() {
+        return publicacion.getPostId();
+    }
 
 	public Usuario getUsuario() {
-		return this.usuario;
-	}
+        return usuario;
+    }
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-
-	public Comentario getComentario1() {
-		return this.comentario1;
-	}
-
-	public void setComentario1(Comentario comentario1) {
-		this.comentario1 = comentario1;
-	}
-
-	public Comentario getComentario2() {
-		return this.comentario2;
-	}
-
-	public void setComentario2(Comentario comentario2) {
-		this.comentario2 = comentario2;
-	}
-
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 }

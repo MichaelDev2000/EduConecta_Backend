@@ -25,10 +25,6 @@ public class Peticionesamistad implements Serializable {
 	@Column(name="peticion_estado")
 	private String peticionEstado;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="updated_at")
-	private Date updatedAt;
-
 	//bi-directional many-to-one association to Usuario
 	@ManyToOne
 	@JoinColumn(name="enviadorUsuario_id")
@@ -64,14 +60,6 @@ public class Peticionesamistad implements Serializable {
 
 	public void setPeticionEstado(String peticionEstado) {
 		this.peticionEstado = peticionEstado;
-	}
-
-	public Date getUpdatedAt() {
-		return this.updatedAt;
-	}
-
-	public void setUpdatedAt(Date updatedAt) {
-		this.updatedAt = updatedAt;
 	}
 
 	public Usuario getUsuario1() {

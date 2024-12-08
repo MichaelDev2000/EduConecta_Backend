@@ -7,6 +7,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.educonecta.app.dto.PublicacionDTO;
 import com.educonecta.app.entity.Publicacion;
 import com.educonecta.app.service.IPublicacionService;
 
@@ -22,19 +24,27 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Tag(name = "API de Publicaciones", description = "Controlador para la gestion de publicaciones")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "ApiPost")
 public class PublicacionesController {
 	@Autowired
 	IPublicacionService service;
 
-	@Operation(summary = "Este endpoint permite crear o registrar un rol.")
+	@Operation(summary = "Este endpoint permite crear o registrar una publicacion.")
 	@PostMapping(value = "registrar", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> RegistrarPublicacion(@RequestBody Publicacion publicacion) {
 		if (service.registrarPublicacion(publicacion)) {
 			return new ResponseEntity<String>("La publicacion ha sido guardada satisfatoriamente", HttpStatus.ACCEPTED);
 		}
 		return new ResponseEntity<String>("Error al guardar Publicacion.", HttpStatus.CONFLICT);
+	}
+	
+	@Operation(summary="Este endpoint nos permite recuperar todas las publicaciones ordenadas de nuevas a antiguas")
+	@GetMapping(value="ListarPostOrdenados")
+	public ResponseEntity<List<PublicacionDTO>> listarPublicacionesOrdenadas() {
+	    List<PublicacionDTO> publicaciones = service.ListarPostOrdenados();
+	    return new ResponseEntity<List<PublicacionDTO>>(publicaciones, HttpStatus.OK);
 	}
 	
 	@Operation(summary="Este endpoint nos permite obtener todas las publicaciones de la base de datos.")
