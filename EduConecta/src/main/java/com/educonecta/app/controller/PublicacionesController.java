@@ -35,7 +35,7 @@ public class PublicacionesController {
 	@PostMapping(value = "registrar", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> RegistrarPublicacion(@RequestBody Publicacion publicacion) {
 		if (service.registrarPublicacion(publicacion)) {
-			return new ResponseEntity<String>("La publicacion ha sido guardada satisfatoriamente", HttpStatus.ACCEPTED);
+			return new ResponseEntity<String>("La publicacion ha sido guardada satisfatoriamente", HttpStatus.CREATED);
 		}
 		return new ResponseEntity<String>("Error al guardar Publicacion.", HttpStatus.CONFLICT);
 	}

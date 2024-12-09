@@ -47,7 +47,7 @@ public class UsuarioController {
 			return new ResponseEntity<String>("El usuario ha sido creado satisfactoriamente papus :)",
 					HttpStatus.CREATED);
 		}
-		return new ResponseEntity<String>("Error interno al guardar el usuario.", HttpStatus.CONFLICT);
+		return new ResponseEntity<String>("Error interno al guardar el usuario.", HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
 	@Operation(summary = "Este endpoint nos permite recuperar todos los usuarios registrados en nuestra Base de datos.")
