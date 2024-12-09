@@ -2,8 +2,6 @@ package com.educonecta.app.dao;
 
 import java.util.List;
 
-import org.springframework.stereotype.Repository;
-
 import com.educonecta.app.dto.PublicacionDTO;
 import com.educonecta.app.entity.Publicacion;
 

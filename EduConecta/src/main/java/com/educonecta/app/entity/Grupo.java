@@ -6,6 +6,8 @@ import java.util.Date;
 import java.sql.Timestamp;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * The persistent class for the grupos database table.
  */
@@ -27,10 +29,15 @@ public class Grupo implements Serializable {
 
     @Lob
     @Column(name = "grupo_imggrupo")
-    private byte[] grupoImggrupo;
+    private String grupoImggrupo;
 
     @Column(name = "grupo_nombre")
     private String grupoNombre;
+    
+    @ManyToOne
+	@JsonProperty("temaId")
+	@JoinColumn(name="tema_id")
+	private Temaacademico temasacademico;
 
 
     public Grupo() {
@@ -61,11 +68,11 @@ public class Grupo implements Serializable {
         this.grupoDescripcion = grupoDescripcion;
     }
 
-    public byte[] getGrupoImggrupo() {
+    public String getGrupoImggrupo() {
         return this.grupoImggrupo;
     }
 
-    public void setGrupoImggrupo(byte[] grupoImggrupo) {
+    public void setGrupoImggrupo(String grupoImggrupo) {
         this.grupoImggrupo = grupoImggrupo;
     }
 
@@ -76,5 +83,13 @@ public class Grupo implements Serializable {
     public void setGrupoNombre(String grupoNombre) {
         this.grupoNombre = grupoNombre;
     }
+    
+    public Temaacademico getTemasacademico() {
+		return this.temasacademico;
+	}
+
+	public void setTemasacademico(Temaacademico temasacademico) {
+	    this.temasacademico = temasacademico;
+	}
 
 }

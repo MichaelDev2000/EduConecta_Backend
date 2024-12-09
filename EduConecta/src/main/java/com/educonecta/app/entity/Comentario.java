@@ -4,6 +4,8 @@ import java.io.Serializable;
 import jakarta.persistence.*;
 import java.sql.Timestamp;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 /**
  * The persistent class for the comentarios database table.
@@ -21,8 +23,6 @@ public class Comentario implements Serializable {
 
 	@Column(name="coment_contenido")
 	private String comentContenido;
-
-	private String comentarioParent_id;
 
 	@Column(name="created_at")
 	private Timestamp createdAt;
@@ -58,14 +58,6 @@ public class Comentario implements Serializable {
 		this.comentContenido = comentContenido;
 	}
 
-	public String getComentarioParent_id() {
-		return this.comentarioParent_id;
-	}
-
-	public void setComentarioParent_id(String comentarioParent_id) {
-		this.comentarioParent_id = comentarioParent_id;
-	}
-
 	public Timestamp getCreatedAt() {
 		return this.createdAt;
 	}
@@ -78,8 +70,8 @@ public class Comentario implements Serializable {
 		return this.publicacion;
 	}
 
-	public void setPublicacione(Publicacion publicacione) {
-		this.publicacion = publicacione;
+	public void setPublicacione(Publicacion publicacion) {
+		this.publicacion = publicacion;
 	}
 	
 	public String getPostId() {
