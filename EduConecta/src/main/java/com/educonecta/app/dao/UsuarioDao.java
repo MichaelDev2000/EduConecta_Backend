@@ -68,14 +68,11 @@ public class UsuarioDao implements IUsuarioDao {
 	}
 
 	@Override
-	public boolean actualizarUsuario(Usuario usuario) {
-		Usuario usuarioEditar = jpa.findById(usuario.getUsuarioId().toString()).get();
-		usuarioEditar.setUsuNombres(usuario.getUsuNombres());
-		usuarioEditar.setUsuApellidos(usuario.getUsuApellidos());
-		usuarioEditar.setUsuBiografia(usuario.getUsuBiografia());
-		usuarioEditar.setUsuImgperfil(usuario.getUsuImgperfil());
-		usuarioEditar.setUsuCorreo(usuario.getUsuCorreo());
-		usuarioEditar.setUsuContrasena(passwordEncoder.encode(usuario.getUsuContrasena()));
+	public boolean actualizarUsuario(String UsuarioId,String Nombres, String Apellidos, String Biografia) {
+		Usuario usuarioEditar = jpa.findById(UsuarioId).get();
+		usuarioEditar.setUsuNombres(Nombres);
+		usuarioEditar.setUsuApellidos(Apellidos);
+		usuarioEditar.setUsuBiografia(Biografia);
 		if (!jpa.save(usuarioEditar).equals(null))
 			return true;
 		return false;
@@ -117,5 +114,4 @@ public class UsuarioDao implements IUsuarioDao {
 		}
 		return false;
 	}
-
 }

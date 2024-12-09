@@ -37,8 +37,8 @@ public class UsuarioService implements IUsuarioService {
 	}
 
 	@Override
-	public boolean actualizarUsuario(Usuario usuario) {
-		return dao.actualizarUsuario(usuario);
+	public boolean actualizarUsuario(String UsuarioId,String Nombres, String Apellidos, String Biografia) {
+		return dao.actualizarUsuario(UsuarioId,Nombres,Apellidos,Biografia);
 	}
 	
 	public UsuarioDTO obtenerPorCorreo(String correo) {

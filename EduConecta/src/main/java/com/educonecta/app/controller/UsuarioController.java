@@ -80,6 +80,16 @@ public class UsuarioController {
 		Usuario userFind = servicio.buscarUsuarioPorId(id);
 		return new ResponseEntity<Usuario>(userFind, HttpStatus.OK);
 	}
+	
+	@Operation(summary = "Este endpoint nos permite cambiar la informacion del usuario")
+	@PatchMapping(value = "updateInfoUsuario")
+	public ResponseEntity<?> actualizarUsuario(@RequestParam String UsuarioId, String Nombres, String Apellidos, String Biografia){
+		if (servicio.actualizarUsuario(UsuarioId, Nombres, Apellidos, Biografia)) {
+			return new ResponseEntity<String>("La información ha sido actualizada correctamente", HttpStatus.OK);
+		}else {
+			return new ResponseEntity<String>("La información no se pudo guardar", HttpStatus.CONFLICT);
+		}
+	}
 
 	@Operation(summary = "Este endpoint nos permite actualizar la contraseña de un usuario")
 	@PatchMapping(value = "updatePassUsuario")

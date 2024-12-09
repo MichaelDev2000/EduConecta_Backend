@@ -11,6 +11,6 @@ public interface IUsuarioService {
 	UsuarioDTO obtenerPorCorreo(String correo);
 	boolean registrarUsuario(Usuario usuario);
 	boolean borrarUsuarioId(String id);
-	boolean actualizarUsuario(Usuario usuario);
 	boolean actualizarContrasena(String UsuarioId, String ContrasenaNew, String ContrasenaOld);
+	boolean actualizarUsuario(String UsuarioId, String Nombres, String Apellidos, String Biografia);
 }

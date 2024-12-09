@@ -11,6 +11,6 @@ public interface IUsuarioDao {
 	Usuario buscarPorCorreo(String correo);
 	boolean registrarUsuario(Usuario usuario);
 	boolean borrarUsuario(String id);
-	boolean actualizarUsuario(Usuario usuario);
 	boolean actualizarContrasena(String UsuarioId, String ContrasenaNew, String ContrasenaOld);
+	boolean actualizarUsuario(String UsuarioId, String Nombres, String Apellidos, String Biografia);
 }
