@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.educonecta.app.dto.UsuarioDetallesDTO;
 import com.educonecta.app.entity.Usuario;
 import com.educonecta.app.service.IUsuarioService;
+import com.educonecta.app.utils.Tools;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -44,11 +45,39 @@ public class UsuarioController {
 	@Operation(summary = "Este endpoint permite crear o registrar un usuario.")
 	@PostMapping(value = "registrar", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> RegistrarUsuario(@RequestBody Usuario usuario) {
-		if (servicio.registrarUsuario(usuario)) {
-			return new ResponseEntity<String>("El usuario ha sido creado satisfactoriamente papus :)",
-					HttpStatus.CREATED);
-		}
-		return new ResponseEntity<String>("Error interno al guardar el usuario.", HttpStatus.INTERNAL_SERVER_ERROR);
+		try {
+	        // Validar Nombres
+	        if (!Tools.validName(usuario.getUsuNombres())) {
+	            return new ResponseEntity<>("El nombre es obligatorio, debe ser solo letras y debe tener como máximo 50 caracteres.", HttpStatus.BAD_REQUEST);
+	        }
+
+	        // Validar Apellidos
+	        if (!Tools.validLastname(usuario.getUsuApellidos())) {
+	            return new ResponseEntity<>("El apellido es obligatorio y debe tener como máximo 50 caracteres.", HttpStatus.BAD_REQUEST);
+	        }
+
+	        // Validar Biografía
+	        if (!Tools.validDescription(usuario.getUsuBiografia())) {
+	            return new ResponseEntity<>("La biografía no puede exceder los 255 caracteres.", HttpStatus.BAD_REQUEST);
+	        }
+
+	        // Validar Contraseña
+	        if (!Tools.validPassword(usuario.getUsuContrasena())) {
+	            return new ResponseEntity<>("La contraseña debe tener al menos 8 caracteres, incluyendo letras y números.", HttpStatus.BAD_REQUEST);
+	        }
+
+	        // Validar Correo
+	        if (!Tools.validEmail(usuario.getUsuCorreo())) {
+	            return new ResponseEntity<>("El correo electrónico es obligatorio y debe ser válido.", HttpStatus.BAD_REQUEST);
+	        }
+	        if (servicio.registrarUsuario(usuario)) {
+	            return new ResponseEntity<>("El usuario ha sido creado satisfactoriamente papus :)", HttpStatus.CREATED);
+	        }
+	        return new ResponseEntity<>("Error interno al guardar el usuario.", HttpStatus.INTERNAL_SERVER_ERROR);
+
+	    } catch (Exception e) {
+	        return new ResponseEntity<>("Error inesperado: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+	    }
 	}
 
 	@Operation(summary = "Este endpoint nos permite recuperar todos los usuarios registrados en nuestra Base de datos.")
@@ -88,6 +117,24 @@ public class UsuarioController {
 	@PatchMapping(value = "updateInfoUsuario")
 	public ResponseEntity<?> actualizarUsuario(@RequestParam String UsuarioId, String Nombres, String Apellidos,
 			String Biografia) {
+		try {
+	        // Validar Nombres
+	        if (!Tools.validName(Nombres)) {
+	            return new ResponseEntity<>("El nombre es obligatorio, debe ser solo letras y debe tener como máximo 100 caracteres.", HttpStatus.BAD_REQUEST);
+	        }
+
+	        // Validar Apellidos
+	        if (!Tools.validLastname(Apellidos)) {
+	            return new ResponseEntity<>("El apellido es obligatorio y debe tener como máximo 100 caracteres.", HttpStatus.BAD_REQUEST);
+	        }
+
+	        // Validar Biografía
+	        if (!Tools.validDescription(Biografia)) {
+	            return new ResponseEntity<>("La biografía no puede exceder los 255 caracteres.", HttpStatus.BAD_REQUEST);
+	        }
+		} catch (Exception e) {
+	        return new ResponseEntity<>("Error inesperado: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+	    }
 		if (servicio.actualizarUsuario(UsuarioId, Nombres, Apellidos, Biografia)) {
 			return new ResponseEntity<String>("La información ha sido actualizada correctamente", HttpStatus.OK);
 		} else {
@@ -99,6 +146,10 @@ public class UsuarioController {
 	@PatchMapping(value = "updatePassUsuario")
 	public ResponseEntity<?> actualizarContraseña(@RequestParam String UserId, String PassNew, String PassOld) {
 		if (servicio.actualizarContrasena(UserId, PassNew, PassOld)) {
+			// Validar Contraseña
+	        if (!Tools.validPassword(PassNew)) {
+	            return new ResponseEntity<>("La contraseña debe tener al menos 8 caracteres, incluyendo letras y números.", HttpStatus.BAD_REQUEST);
+	        }
 			return new ResponseEntity<String>("La contraseña se actualizo correctamente", HttpStatus.OK);
 		} else {
 			return new ResponseEntity<String>("La contraseña antigua no es correcta", HttpStatus.CONFLICT);
