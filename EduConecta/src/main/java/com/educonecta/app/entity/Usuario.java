@@ -2,13 +2,7 @@ package com.educonecta.app.entity;
 
 import java.io.Serializable;
 import jakarta.persistence.*;
-
-import java.util.ArrayList;
-import java.util.Date;
 import java.sql.Timestamp;
-import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 /**
@@ -47,10 +41,11 @@ public class Usuario implements Serializable {
 	@Column(name="usu_nombres")
 	private String usuNombres;
 
+	@Column(name="usu_profesion")
+	private String usuProfesion;
+
 	@Column(name="usu_status")
 	private int usuStatus;
-
-
 
 	public Usuario() {
 	}
@@ -117,6 +112,14 @@ public class Usuario implements Serializable {
 
 	public void setUsuNombres(String usuNombres) {
 		this.usuNombres = usuNombres;
+	}
+
+	public String getUsuProfesion() {
+		return this.usuProfesion;
+	}
+
+	public void setUsuProfesion(String usuProfesion) {
+		this.usuProfesion = usuProfesion;
 	}
 
 	public int getUsuStatus() {

@@ -25,6 +25,9 @@ public class Temaacademico implements Serializable {
 	@Column(name="tema_nombre")
 	private String temaNombre;
 
+	//bi-directional many-to-one association to Grupo
+	@OneToMany(mappedBy="temasacademico")
+	private List<Grupo> grupos;
 
 	public Temaacademico() {
 	}
@@ -53,6 +56,26 @@ public class Temaacademico implements Serializable {
 		this.temaNombre = temaNombre;
 	}
 
+	public List<Grupo> getGrupos() {
+		return this.grupos;
+	}
 
+	public void setGrupos(List<Grupo> grupos) {
+		this.grupos = grupos;
+	}
+
+	public Grupo addGrupo(Grupo grupo) {
+		getGrupos().add(grupo);
+		grupo.setTemasacademico(this);
+
+		return grupo;
+	}
+
+	public Grupo removeGrupo(Grupo grupo) {
+		getGrupos().remove(grupo);
+		grupo.setTemasacademico(null);
+
+		return grupo;
+	}
 
 }
