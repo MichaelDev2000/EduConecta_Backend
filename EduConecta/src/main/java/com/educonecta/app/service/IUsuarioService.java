@@ -9,7 +9,10 @@ import com.educonecta.app.entity.Usuario;
 public interface IUsuarioService {
 	List<Usuario> ListarTodosUsuarios();
 	Usuario buscarUsuarioPorId(String id);
-	UsuarioDTO obtenerPorCorreo(String correo);
+	Usuario obtenerPorCorreo(String correo);
+	UsuarioDTO buscarPorCorreo(String correo);
+	public String generateJwtToken(Usuario usuario);
+	Usuario findOrCreateUser(String email, String name, String picture);
 	UsuarioDetallesDTO detallesUsuario(String usuarioId);
 	boolean registrarUsuario(Usuario usuario);
 	boolean borrarUsuarioId(String id);

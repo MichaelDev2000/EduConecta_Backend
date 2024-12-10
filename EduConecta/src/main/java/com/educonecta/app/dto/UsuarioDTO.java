@@ -3,6 +3,8 @@ package com.educonecta.app.dto;
 import java.sql.Timestamp;
 import java.util.Date;
 
+import com.educonecta.app.entity.Usuario;
+
 public class UsuarioDTO {
     
     private String usuarioId;
@@ -13,7 +15,20 @@ public class UsuarioDTO {
     private String usuNombres;
     private int usuStatus;
     
-    // Getters y setters
+    public UsuarioDTO() {
+	}
+    
+    public UsuarioDTO(Usuario usuario) {
+        this.usuarioId = usuario.getUsuarioId();
+        this.usuApellidos = usuario.getUsuApellidos();
+        this.usuBiografia = usuario.getUsuBiografia();
+        this.usuCorreo = usuario.getUsuCorreo();
+        this.usuImgperfil = usuario.getUsuImgperfil();
+        this.usuNombres = usuario.getUsuNombres();
+        this.usuStatus = usuario.getUsuStatus();
+    }
+    
+
     public String getUsuarioId() {
         return usuarioId;
     }
