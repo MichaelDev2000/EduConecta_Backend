@@ -33,7 +33,7 @@ public class PeticionAmistadController {
 
 	@Operation(summary = "Este endpoint permite  registrar una peticion.")
 	@PostMapping(value = "registrarPeticion", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> RegistrarPublicacion(@RequestBody Peticionesamistad peticion) {
+	public ResponseEntity<?> RegistrarPeticion(@RequestBody Peticionesamistad peticion) {
 		if (service.registrarPeticion(peticion)) {
 			return new ResponseEntity<String>("La peticion ha sido guardada satisfatoriamente", HttpStatus.ACCEPTED);
 		}
