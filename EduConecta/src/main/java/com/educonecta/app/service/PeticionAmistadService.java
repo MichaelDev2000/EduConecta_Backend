@@ -44,4 +44,10 @@ public class PeticionAmistadService implements IPeticionAmistadService {
 		return dao.actualizarPeticion(peticion);
 	}
 
+	@Override
+	public List<Peticionesamistad> listarPeticionesPendientesRecibidas(String idUsuarioDestino) {
+		// TODO Auto-generated method stub
+		return dao.listarPeticionesPendientesRecibidas(idUsuarioDestino);
+	}
+
 }

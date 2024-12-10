@@ -84,7 +84,6 @@ public class PublicacionDao implements IPublicacionesDao {
 			Temaacademico tema = publicacion.getTemasacademico();
 			if (tema != null) {
 				publicacionDto.setTemaNombre(tema.getTemaNombre());
-				publicacionDto.setTemaDescripcion(tema.getTemaDescripcion());
 			}
 
 			Usuario usuario = publicacion.getUsuario();

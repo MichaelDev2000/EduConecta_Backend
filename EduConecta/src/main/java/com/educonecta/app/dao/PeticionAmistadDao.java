@@ -31,6 +31,7 @@ public class PeticionAmistadDao implements IPeticionAmistadDao {
 	public boolean registrarPeticion(Peticionesamistad peticion) {
 		UUID uuid = UUID.randomUUID();
 		peticion.setPeticionId(uuid.toString());
+		peticion.setPeticionEstado("PENDIENTE");
 		if(!jpa.save(peticion).equals(null)) return true;
 		return false;
 	}
@@ -47,6 +48,12 @@ public class PeticionAmistadDao implements IPeticionAmistadDao {
 		peticionEdit.setPeticionEstado(peticion.getPeticionEstado());
 		if(!jpa.save(peticionEdit).equals(null)) return true;
 		return false;
+	}
+
+	@Override
+	public List<Peticionesamistad> listarPeticionesPendientesRecibidas(String idUsuarioDestino) {
+		// TODO Auto-generated method stub
+		return  jpa.findByUsuario2_UsuarioIdAndPeticionEstado(idUsuarioDestino, "PENDIENTE");
 	}
 
 }

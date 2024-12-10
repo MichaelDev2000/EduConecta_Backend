@@ -19,6 +19,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.educonecta.app.dto.UsuarioDetallesDTO;
 import com.educonecta.app.entity.Usuario;
 import com.educonecta.app.service.IUsuarioService;
 
@@ -34,10 +35,10 @@ public class UsuarioController {
 	@Autowired
 	IUsuarioService servicio;
 
-	@Operation(summary="Este endpoint nos permite saludar y probar xd")
-	@GetMapping(value="Saludar")
-	public ResponseEntity<String> saludar(){
-		return new ResponseEntity<String>("Holaaaaa si funciona",HttpStatus.OK);
+	@Operation(summary = "Este endpoint nos permite saludar y probar xd")
+	@GetMapping(value = "Saludar")
+	public ResponseEntity<String> saludar() {
+		return new ResponseEntity<String>("Holaaaaa si funciona", HttpStatus.OK);
 	}
 
 	@Operation(summary = "Este endpoint permite crear o registrar un usuario.")
@@ -63,14 +64,16 @@ public class UsuarioController {
 		// 2. armamos la respuesta de tipo ResponseEntity
 		return new ResponseEntity<List<Usuario>>(list, headers, HttpStatus.ACCEPTED);
 	}
-	
-	@Operation(summary="Este endpoint nos permite eliminar una cuenta de usuario")
-	@DeleteMapping(value="BorrarCuenta")
-	public ResponseEntity<?> borrarCuenta(@RequestParam String usuarioId){
-		if(servicio.borrarUsuarioId(usuarioId)) {
-			return new ResponseEntity<String>("La cuenta de usuario con ID: "+usuarioId+" ha sido eliminada satisfactoriamente",HttpStatus.OK);
-		}else {
-			return new ResponseEntity<String>("Error al intentar elminar la cuenta de usuario.",HttpStatus.CONFLICT);
+
+	@Operation(summary = "Este endpoint nos permite eliminar una cuenta de usuario")
+	@DeleteMapping(value = "BorrarCuenta")
+	public ResponseEntity<?> borrarCuenta(@RequestParam String usuarioId) {
+		if (servicio.borrarUsuarioId(usuarioId)) {
+			return new ResponseEntity<String>(
+					"La cuenta de usuario con ID: " + usuarioId + " ha sido eliminada satisfactoriamente",
+					HttpStatus.OK);
+		} else {
+			return new ResponseEntity<String>("Error al intentar elminar la cuenta de usuario.", HttpStatus.CONFLICT);
 		}
 	}
 
@@ -80,13 +83,14 @@ public class UsuarioController {
 		Usuario userFind = servicio.buscarUsuarioPorId(id);
 		return new ResponseEntity<Usuario>(userFind, HttpStatus.OK);
 	}
-	
+
 	@Operation(summary = "Este endpoint nos permite cambiar la informacion del usuario")
 	@PatchMapping(value = "updateInfoUsuario")
-	public ResponseEntity<?> actualizarUsuario(@RequestParam String UsuarioId, String Nombres, String Apellidos, String Biografia){
+	public ResponseEntity<?> actualizarUsuario(@RequestParam String UsuarioId, String Nombres, String Apellidos,
+			String Biografia) {
 		if (servicio.actualizarUsuario(UsuarioId, Nombres, Apellidos, Biografia)) {
 			return new ResponseEntity<String>("La información ha sido actualizada correctamente", HttpStatus.OK);
-		}else {
+		} else {
 			return new ResponseEntity<String>("La información no se pudo guardar", HttpStatus.CONFLICT);
 		}
 	}
@@ -99,7 +103,18 @@ public class UsuarioController {
 		} else {
 			return new ResponseEntity<String>("La contraseña antigua no es correcta", HttpStatus.CONFLICT);
 		}
+	}
 
+	@Operation(summary = "Este endpoint nos permite recibir informacion completa del usuario")
+	@GetMapping(value = "InfoUsuario")
+	public ResponseEntity<?> obtenerInforUsuario(@RequestParam String usuarioId) {
+		UsuarioDetallesDTO detalles = servicio.detallesUsuario(usuarioId);
+
+		if (detalles == null) {
+			return ResponseEntity.notFound().build(); // Si no se encuentra el usuario
+		}
+
+		return ResponseEntity.ok(detalles); // Devuelve los detalles del usuario en el cuerpo de la respuesta
 	}
 
 }

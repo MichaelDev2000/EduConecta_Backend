@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.educonecta.app.entity.Amistad;
+import com.educonecta.app.entity.Usuario;
 import com.educonecta.app.service.IAmistadService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -58,4 +59,20 @@ public class AmistadController {
 		return new ResponseEntity<Amistad>(amistadFind, HttpStatus.OK);
 
 	}
+	
+	@Operation(summary = "Este endpoint nos permite listar todos los amigos de un usuario por su id")
+	@GetMapping("listarAmigosUsuario")
+	public ResponseEntity<List<Usuario>> obtenerAmigosPorUsuarioId(@RequestParam String usuarioId) {
+		List<Usuario> amigos = service.listarAmigosPorUsuarioId(usuarioId);
+		
+
+		if (amigos.isEmpty()) {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+
+
+		// Devolver la respuesta con la lista de amigos y los headers
+		return new ResponseEntity<>(amigos, HttpStatus.OK);
+	}
+
 }

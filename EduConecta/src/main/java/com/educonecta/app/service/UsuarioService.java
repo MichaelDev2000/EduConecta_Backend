@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.educonecta.app.dao.IUsuarioDao;
 import com.educonecta.app.dto.UsuarioDTO;
+import com.educonecta.app.dto.UsuarioDetallesDTO;
 import com.educonecta.app.entity.Usuario;
 
 @Service
@@ -61,6 +62,12 @@ public class UsuarioService implements IUsuarioService {
 	public boolean actualizarContrasena(String UsuarioId, String ContrasenaNew, String ContrasenaOld) {
 		// TODO Auto-generated method stub
 		return dao.actualizarContrasena(UsuarioId, ContrasenaNew, ContrasenaOld);
+	}
+
+	@Override
+	public UsuarioDetallesDTO detallesUsuario(String usuarioId) {
+		// TODO Auto-generated method stub
+		return dao.detallesUsuario(usuarioId);
 	}
 
 }

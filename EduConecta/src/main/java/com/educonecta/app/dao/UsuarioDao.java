@@ -3,14 +3,24 @@ package com.educonecta.app.dao;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.educonecta.app.dto.ComentarioDTO;
+import com.educonecta.app.dto.GrupoDTO;
+import com.educonecta.app.dto.PublicacionDTO;
+import com.educonecta.app.dto.UsuarioDetallesDTO;
+import com.educonecta.app.entity.Publicacion;
 import com.educonecta.app.entity.Usuario;
+import com.educonecta.app.jpa.IComentarioJpa;
+import com.educonecta.app.jpa.ILikeJpa;
+import com.educonecta.app.jpa.IPublicacionJpa;
 import com.educonecta.app.jpa.IUsuarioJpa;
 import com.educonecta.app.utils.Tools;
 
@@ -29,6 +39,15 @@ public class UsuarioDao implements IUsuarioDao {
 
 	@Autowired
 	IUsuarioJpa jpa;
+	
+	@Autowired
+	IPublicacionJpa jpaPubli;
+	
+	@Autowired
+	ILikeJpa likeJpa;
+	
+	@Autowired
+	IComentarioJpa comentJpa;
 
 	@Override
 	public List<Usuario> ListarUsuarios() {
@@ -68,7 +87,7 @@ public class UsuarioDao implements IUsuarioDao {
 	}
 
 	@Override
-	public boolean actualizarUsuario(String UsuarioId,String Nombres, String Apellidos, String Biografia) {
+	public boolean actualizarUsuario(String UsuarioId, String Nombres, String Apellidos, String Biografia) {
 		Usuario usuarioEditar = jpa.findById(UsuarioId).get();
 		usuarioEditar.setUsuNombres(Nombres);
 		usuarioEditar.setUsuApellidos(Apellidos);
@@ -113,5 +132,73 @@ public class UsuarioDao implements IUsuarioDao {
 			return false;
 		}
 		return false;
+	}
+
+	@Override
+	public UsuarioDetallesDTO detallesUsuario(String usuarioId) {
+
+	    Usuario usuario = jpa.findById(usuarioId).orElse(null);
+	    if (usuario == null) {
+	        return null; 
+	    }
+
+
+	    List<Publicacion> publicaciones = jpaPubli.findByUsuario_UsuarioId(usuarioId);
+	    
+	    
+	    
+
+	    List<PublicacionDTO> publicacionesDTO = publicaciones.stream()
+	        .map(publicacion -> {
+	            PublicacionDTO dto = new PublicacionDTO();
+	            dto.setPostId(publicacion.getPostId());
+	            dto.setContenido(publicacion.getPostContenido());
+	            dto.setImagen(publicacion.getPostImgpost());
+	            dto.setCreadoEn(publicacion.getCreatedAt().toString());
+	            dto.setTemaNombre(publicacion.getTemasacademico().getTemaNombre());
+	            dto.setUsuarioID(publicacion.getUsuario().getUsuarioId());
+	            dto.setUsuarioNombre(publicacion.getUsuario().getUsuNombres());
+	            dto.setUsuarioImagen(publicacion.getUsuario().getUsuImgperfil());
+	            Long numeroLikes = likeJpa.countByPublicacionPostId(publicacion.getPostId());
+	            dto.setNumeroLikes(numeroLikes);
+	            
+	            List<ComentarioDTO> comentarios = comentJpa.findByPublicacion_PostId(publicacion.getPostId()).stream()
+	    				.map(comentario -> {
+	    					ComentarioDTO comentarioDto = new ComentarioDTO();
+	    					comentarioDto.setComentarioId(comentario.getComentarioId());
+	    					comentarioDto.setContenido(comentario.getComentContenido());
+	    					comentarioDto.setCreadoEn(comentario.getCreatedAt().toString());
+
+
+
+
+	    					Usuario comentarioUsuario = comentario.getUsuario();
+	    					if (comentarioUsuario != null) {
+	    						comentarioDto.setUsuarioID(comentarioUsuario.getUsuarioId());
+	    						comentarioDto.setUsuarioNombre(
+	    								comentarioUsuario.getUsuNombres() + " " + comentarioUsuario.getUsuApellidos());
+	    						comentarioDto.setUsuarioImagen(comentarioUsuario.getUsuImgperfil());
+	    					}
+
+	    					return comentarioDto;
+	    				}).collect(Collectors.toList());
+	            
+	            
+	            dto.setComentarios(comentarios);
+	            return dto;
+	        })
+	        .collect(Collectors.toList());
+
+
+	    UsuarioDetallesDTO usuarioDetallesDTO = new UsuarioDetallesDTO();
+	    usuarioDetallesDTO.setUsuarioId(usuario.getUsuarioId());
+	    usuarioDetallesDTO.setUsuNombres(usuario.getUsuNombres());
+	    usuarioDetallesDTO.setUsuImgperfil(usuario.getUsuImgperfil());
+	    usuarioDetallesDTO.setUsuApellidos(usuario.getUsuApellidos());
+	    usuarioDetallesDTO.setUsuBiografia(usuario.getUsuBiografia());
+	    usuarioDetallesDTO.setUsuCorreo(usuario.getUsuCorreo());
+	    usuarioDetallesDTO.setPublicaciones(publicacionesDTO);
+
+	    return usuarioDetallesDTO;
 	}
 }

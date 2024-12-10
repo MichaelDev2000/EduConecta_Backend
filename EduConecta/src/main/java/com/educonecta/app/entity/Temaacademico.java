@@ -19,10 +19,6 @@ public class Temaacademico implements Serializable {
 	@Column(name="tema_id")
 	private String temaId;
 
-	private String descripcion;
-
-	private String nombre;
-
 	@Column(name="tema_descripcion")
 	private String temaDescripcion;
 
@@ -39,22 +35,6 @@ public class Temaacademico implements Serializable {
 
 	public void setTemaId(String temaId) {
 		this.temaId = temaId;
-	}
-
-	public String getDescripcion() {
-		return this.descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-
-	public String getNombre() {
-		return this.nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
 	}
 
 	public String getTemaDescripcion() {

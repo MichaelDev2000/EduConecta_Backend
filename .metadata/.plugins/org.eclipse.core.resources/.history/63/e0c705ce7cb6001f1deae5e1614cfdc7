@@ -1,0 +1,71 @@
+package com.educonecta.app.dto;
+
+import java.util.List;
+
+public class UsuarioDetallesDTO {
+    private String usuarioId;
+    private String nombres;
+    private String apellidos;
+    private String imagenPerfil;
+    private String correo;
+    
+    private List<PublicacionDTO> publicaciones;
+    private List<GrupoDTO> grupos;
+
+    // Getters y setters
+    public String getUsuarioId() {
+        return usuarioId;
+    }
+
+    public void setUsuarioId(String usuarioId) {
+        this.usuarioId = usuarioId;
+    }
+
+    public String getApellidos() {
+        return this.apellidos;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+    
+    public String getNombre() {
+        return this.nombres;
+    }
+
+    public void setNombre(String nombres) {
+        this.nombres = nombres;
+    }
+
+    public String getImagenPerfil() {
+        return imagenPerfil;
+    }
+
+    public void setImagenPerfil(String imagenPerfil) {
+        this.imagenPerfil = imagenPerfil;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public List<PublicacionDTO> getPublicaciones() {
+        return publicaciones;
+    }
+
+    public void setPublicaciones(List<PublicacionDTO> publicaciones) {
+        this.publicaciones = publicaciones;
+    }
+
+    public List<GrupoDTO> getGrupos() {
+        return grupos;
+    }
+
+    public void setGrupos(List<GrupoDTO> grupos) {
+        this.grupos = grupos;
+    }
+}

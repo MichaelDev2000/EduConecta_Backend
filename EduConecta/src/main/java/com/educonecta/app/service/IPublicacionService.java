@@ -3,6 +3,7 @@ package com.educonecta.app.service;
 import java.util.List;
 
 import com.educonecta.app.dto.PublicacionDTO;
+import com.educonecta.app.entity.Peticionesamistad;
 import com.educonecta.app.entity.Publicacion;
 
 public interface IPublicacionService {

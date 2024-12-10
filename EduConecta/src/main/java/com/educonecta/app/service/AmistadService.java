@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.educonecta.app.dao.IAmistadDao;
 import com.educonecta.app.entity.Amistad;
+import com.educonecta.app.entity.Usuario;
 
 @Service
 public class AmistadService implements IAmistadService{
@@ -42,6 +43,12 @@ public class AmistadService implements IAmistadService{
 	public boolean acutalizarAmistad(Amistad amistad) {
 		// TODO Auto-generated method stub
 		return dao.actualizarAmistad(amistad);
+	}
+
+	@Override
+	public List<Usuario> listarAmigosPorUsuarioId(String usuarioId) {
+		// TODO Auto-generated method stub
+		return dao.listarAmigosPorUsuarioId(usuarioId);
 	}
 
 }

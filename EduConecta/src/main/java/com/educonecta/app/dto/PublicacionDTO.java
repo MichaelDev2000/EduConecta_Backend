@@ -7,10 +7,8 @@ public class PublicacionDTO {
     private String contenido;
     private String imagen;
     private String creadoEn;
-    private String actualizadoEn;
 
     private String temaNombre;
-    private String temaDescripcion;
 
     private String usuarioID;
     private String usuarioNombre;
@@ -21,7 +19,7 @@ public class PublicacionDTO {
     private String grupoDescripcion;
 
     private Long numeroLikes;
-    private List<ComentarioDTO> comentarios;  // Usamos un DTO para los comentarios
+    private List<ComentarioDTO> comentarios;  
 
 
     // Getters y setters
@@ -49,24 +47,14 @@ public class PublicacionDTO {
     public void setCreadoEn(String creadoEn) {
         this.creadoEn = creadoEn;
     }
-    public String getActualizadoEn() {
-        return actualizadoEn;
-    }
-    public void setActualizadoEn(String actualizadoEn) {
-        this.actualizadoEn = actualizadoEn;
-    }
+
     public String getTemaNombre() {
         return temaNombre;
     }
     public void setTemaNombre(String temaNombre) {
         this.temaNombre = temaNombre;
     }
-    public String getTemaDescripcion() {
-        return temaDescripcion;
-    }
-    public void setTemaDescripcion(String temaDescripcion) {
-        this.temaDescripcion = temaDescripcion;
-    }
+    
     public String getUsuarioID() {
         return usuarioID;
     }
