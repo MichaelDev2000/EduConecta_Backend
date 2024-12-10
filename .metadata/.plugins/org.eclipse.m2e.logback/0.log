@@ -3151,3 +3151,6 @@ org.eclipse.core.runtime.CoreException: Could not resolve artifact com.google.gu
 2024-12-10 17:22:07,406 [Worker-94: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
 2024-12-10 17:22:07,411 [Worker-94: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
 2024-12-10 17:22:07,413 [Worker-94: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\TheEnginner\Downloads\EduConecta\EduConecta\src\test\resources
+2024-12-10 17:43:58,161 [Worker-107: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-12-10 17:43:58,164 [Worker-107: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-12-10 17:43:58,168 [Worker-107: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\TheEnginner\Downloads\EduConecta\EduConecta\src\test\resources

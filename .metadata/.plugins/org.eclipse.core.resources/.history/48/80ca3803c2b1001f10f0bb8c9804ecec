@@ -1,5 +1,0 @@
-package com.educonecta.app.dao;
-
-public interface IMiembrosGrupoDao {
-
-}
