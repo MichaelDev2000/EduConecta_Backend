@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.educonecta.app.dto.PublicacionDTO;
 import com.educonecta.app.entity.Publicacion;
 import com.educonecta.app.service.IPublicacionService;
+import com.educonecta.app.utils.Tools;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -35,6 +36,9 @@ public class PublicacionesController {
 	@PostMapping(value = "registrar", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> RegistrarPublicacion(@RequestBody Publicacion publicacion) {
 		if (service.registrarPublicacion(publicacion)) {
+			if (!Tools.validarTextoNoVacio(publicacion.getPostContenido())) {
+				 return new ResponseEntity<>("El comentario no puede ser vacio.", HttpStatus.BAD_REQUEST);
+		        }
 			return new ResponseEntity<String>("La publicacion ha sido guardada satisfatoriamente", HttpStatus.CREATED);
 		}
 		return new ResponseEntity<String>("Error al guardar Publicacion.", HttpStatus.CONFLICT);

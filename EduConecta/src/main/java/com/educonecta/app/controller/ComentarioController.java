@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.educonecta.app.entity.Comentario;
 import com.educonecta.app.service.IComentarioService;
-
+import com.educonecta.app.utils.Tools;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -35,6 +35,9 @@ public class ComentarioController {
 	@PostMapping(value = "registrar", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> RegistrarComentario(@RequestBody Comentario comentario) {
 		if (service.registrarComentario(comentario)) {
+			 if (!Tools.validarTextoNoVacio(comentario.getComentContenido())) {
+				 return new ResponseEntity<>("El comentario no puede ser vacio.", HttpStatus.BAD_REQUEST);
+		        }
 			return new ResponseEntity<String>("El Comentario ha sido guardado satisfactoriamente :)", HttpStatus.CREATED);
 		}
 		return new ResponseEntity<String>("Ha habido un error al guardar el Comentario", HttpStatus.CONFLICT);
