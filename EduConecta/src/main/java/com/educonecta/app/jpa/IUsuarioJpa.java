@@ -9,5 +9,5 @@ import com.educonecta.app.entity.Usuario;
 
 
 public interface IUsuarioJpa extends JpaRepository<Usuario, String>{
-	Optional<Usuario> findByUsuCorreo(String usuCorreo);
+	Usuario findByUsuCorreo(String usuCorreo);
 }

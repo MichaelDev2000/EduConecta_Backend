@@ -1,5 +1,0 @@
-package com.educonecta.app.service;
-
-public interface INotificacionService {
-
-}

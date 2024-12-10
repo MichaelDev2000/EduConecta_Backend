@@ -15,7 +15,7 @@ public class UsuarioService implements IUsuarioService {
 
 	@Autowired
 	IUsuarioDao dao;
-	
+
 	@Override
 	public List<Usuario> ListarTodosUsuarios() {
 		return dao.ListarUsuarios();
@@ -28,8 +28,8 @@ public class UsuarioService implements IUsuarioService {
 
 	@Override
 	public boolean registrarUsuario(Usuario usuario) {
-		
-		return dao.registrarUsuario(usuario) ;
+
+		return dao.registrarUsuario(usuario);
 	}
 
 	@Override
@@ -38,25 +38,20 @@ public class UsuarioService implements IUsuarioService {
 	}
 
 	@Override
-	public boolean actualizarUsuario(String UsuarioId,String Nombres, String Apellidos, String Biografia) {
-		return dao.actualizarUsuario(UsuarioId,Nombres,Apellidos,Biografia);
+	public boolean actualizarUsuario(String UsuarioId, String Nombres, String Apellidos, String Biografia) {
+		return dao.actualizarUsuario(UsuarioId, Nombres, Apellidos, Biografia);
 	}
-	
-	public UsuarioDTO obtenerPorCorreo(String correo) {
-        Usuario usuario = dao.buscarPorCorreo(correo);
-        
-        UsuarioDTO usuarioDTO = new UsuarioDTO();
-        usuarioDTO.setUsuarioId(usuario.getUsuarioId());
-        usuarioDTO.setUsuApellidos(usuario.getUsuApellidos());
-        usuarioDTO.setUsuBiografia(usuario.getUsuBiografia());
-        usuarioDTO.setUsuCorreo(usuario.getUsuCorreo());
-        usuarioDTO.setUsuImgperfil(usuario.getUsuImgperfil());
-        usuarioDTO.setUsuNombres(usuario.getUsuNombres());
-        usuarioDTO.setUsuStatus(usuario.getUsuStatus());
 
-        return usuarioDTO;
-        
-    }
+	@Override
+	public Usuario obtenerPorCorreo(String correo) {
+		Usuario usuario = dao.buscarPorCorreo(correo);
+
+		if (usuario == null) {
+	        return null;  
+	    }
+	    return usuario;
+
+	}
 
 	@Override
 	public boolean actualizarContrasena(String UsuarioId, String ContrasenaNew, String ContrasenaOld) {
@@ -68,6 +63,24 @@ public class UsuarioService implements IUsuarioService {
 	public UsuarioDetallesDTO detallesUsuario(String usuarioId) {
 		// TODO Auto-generated method stub
 		return dao.detallesUsuario(usuarioId);
+	}
+
+	@Override
+	public Usuario findOrCreateUser(String email, String name, String picture) {
+
+		return dao.findOrCreateUser(email, name, picture);
+	}
+
+	@Override
+	public String generateJwtToken(Usuario usuario) {
+		// TODO Auto-generated method stub
+		return dao.generateJwtToken(usuario);
+	}
+
+	@Override
+	public UsuarioDTO buscarPorCorreo(String correo) {
+		// TODO Auto-generated method stub
+		return dao.obtenerPorCorreo(correo);
 	}
 
 }
