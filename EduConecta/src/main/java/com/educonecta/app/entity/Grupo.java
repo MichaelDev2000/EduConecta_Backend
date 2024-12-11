@@ -2,43 +2,47 @@ package com.educonecta.app.entity;
 
 import java.io.Serializable;
 import jakarta.persistence.*;
+import java.util.Date;
 import java.sql.Timestamp;
+import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The persistent class for the grupos database table.
- * 
  */
 @Entity
-@Table(name="grupos")
-@NamedQuery(name="Grupo.findAll", query="SELECT g FROM Grupo g")
+@Table(name = "grupos")
+@NamedQuery(name = "Grupo.findAll", query = "SELECT g FROM Grupo g")
 public class Grupo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="grupo_id")
+	@Column(name = "grupo_id")
 	private String grupoId;
 
-	@Column(name="created_at")
+	@Column(name = "created_at")
 	private Timestamp createdAt;
 
-	@Column(name="grupo_descripcion")
+	@Column(name = "grupo_descripcion")
 	private String grupoDescripcion;
 
-	@Column(name="grupo_img")
-	private String grupoImg;
+	@Lob
+	@Column(name = "grupo_imggrupo")
+	private String grupoImggrupo;
 
-	@Column(name="grupo_nombre")
+	@Column(name = "grupo_nombre")
 	private String grupoNombre;
 
-	//bi-directional many-to-one association to Temaacademico
 	@ManyToOne
-	@JoinColumn(name="tema_id")
+	@JsonProperty("temaId")
+	@JoinColumn(name = "tema_id")
 	private Temaacademico temasacademico;
 
 	public Grupo() {
 	}
 
+	// Getters y setters
 	public String getGrupoId() {
 		return this.grupoId;
 	}
@@ -63,12 +67,12 @@ public class Grupo implements Serializable {
 		this.grupoDescripcion = grupoDescripcion;
 	}
 
-	public String getGrupoImg() {
-		return this.grupoImg;
+	public String getGrupoImggrupo() {
+		return this.grupoImggrupo;
 	}
 
-	public void setGrupoImg(String grupoImg) {
-		this.grupoImg = grupoImg;
+	public void setGrupoImggrupo(String grupoImggrupo) {
+		this.grupoImggrupo = grupoImggrupo;
 	}
 
 	public String getGrupoNombre() {
