@@ -7,6 +7,10 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.educonecta.app.entity.Chat;
+import com.educonecta.app.entity.ChatMessage;
+import com.educonecta.app.entity.Mensageschat;
 import com.educonecta.app.service.IChatService;
 
 
@@ -40,6 +46,7 @@ public class ChatController {
 		return new ResponseEntity<String>("Ha habido un error al guardar el chat", HttpStatus.CONFLICT);
 	}
 
+
 	@Operation(summary = "Este endpoint nos permite listar todos los chats")
 	@GetMapping(value = "ListaChats")
 	public ResponseEntity<List<Chat>> listarChats() {
@@ -50,7 +57,19 @@ public class ChatController {
 		headers.add("Test", "Hola");
 		return new ResponseEntity<List<Chat>>(lista, headers, HttpStatus.ACCEPTED);
 	}
+	
+	private final SimpMessagingTemplate messagingTemplate;
 
+    public ChatController(SimpMessagingTemplate messagingTemplate) {
+        this.messagingTemplate = messagingTemplate;
+    }
+
+    @MessageMapping("/chat/{roomId}")
+    @SendTo("/topic/{roomId}")
+    public ChatMessage sendMessage(ChatMessage chatMessage, @DestinationVariable String roomId) {
+        return chatMessage; 
+    }
+    
 	@Operation(summary = "Este endpoint nos permite recuperar un Chat por su Id")
 	@GetMapping(value = "Chat-id")
 	public ResponseEntity<?> chatById(@RequestParam String id) {
